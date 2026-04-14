@@ -12,28 +12,17 @@
     min-height: 100vh; margin: 0;
     background: linear-gradient(135deg, #0F1D3F, #1B4FD8);
   }
-  .box {
-    text-align: center; color: #fff; padding: 40px 24px;
-  }
+  .box { text-align: center; color: #fff; padding: 40px 24px; }
   .spinner {
     width: 40px; height: 40px;
     border: 3px solid rgba(255,255,255,.2);
-    border-top-color: #60A5FA;
-    border-radius: 50%;
-    animation: spin .65s linear infinite;
-    margin: 0 auto 20px;
+    border-top-color: #60A5FA; border-radius: 50%;
+    animation: spin .65s linear infinite; margin: 0 auto 20px;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   h2 { font-size: 18px; margin: 0 0 8px; font-weight: 700; }
   p  { font-size: 13px; color: rgba(255,255,255,.6); margin: 0; }
   .err { color: #FCA5A5; font-weight: 600; margin-top: 12px; font-size: 14px; }
-  a.btn {
-    display: inline-block; margin-top: 20px;
-    background: rgba(255,255,255,.15); color: #fff;
-    padding: 9px 20px; border-radius: 8px;
-    font-size: 13px; text-decoration: none;
-  }
-  a.btn:hover { background: rgba(255,255,255,.25); }
 </style>
 </head>
 <body>
@@ -44,14 +33,9 @@
   <div class="err" id="err" style="display:none"></div>
 </div>
 <script>
-// ╔══════════════════════════════════════════════════════╗
-// ║  GANTI BARIS INI dengan URL Web App GAS Anda         ║
-// ╚══════════════════════════════════════════════════════╝
 var GAS_URL = 'https://script.google.com/macros/s/AKfycbz3jEe5ciLZxZ9W52rWWzYCjOQ1QbPNQK9bB0R8GSR-fcVfbQandHkQ1MwFvoIpYl2d/exec';
 function getSlug() {
-  var parts = window.location.pathname.split('/').filter(function(p) {
-    return p.length > 0;
-  });
+  var parts = window.location.pathname.split('/').filter(function(p){ return p.length > 0; });
   var slug = parts[parts.length - 1];
   if (!slug || slug === 'f') slug = '';
   var qs = new URLSearchParams(window.location.search);
@@ -65,12 +49,8 @@ if (!slug) {
   document.getElementById('err').textContent    = 'ID formulir tidak ditemukan dalam URL.';
   document.getElementById('msg').textContent    = 'Pastikan URL mengandung ID formulir.';
 } else {
-  var target = GAS_URL + '?page=form&id=' + encodeURIComponent(slug);
-  document.getElementById('msg').textContent =
-    'Mengalihkan ke formulir: ' + slug;
-  setTimeout(function() {
-    window.location.replace(target);
-  }, 600);
+  document.getElementById('msg').textContent = 'Mengalihkan ke formulir: ' + slug;
+  setTimeout(function(){ window.location.replace(GAS_URL + '?page=form&id=' + encodeURIComponent(slug)); }, 600);
 }
 </script>
 </body>
