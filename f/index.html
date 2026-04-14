@@ -33,24 +33,26 @@
   <div class="err" id="err" style="display:none"></div>
 </div>
 <script>
-var GAS_URL = 'https://script.google.com/macros/s/AKfycbz3jEe5ciLZxZ9W52rWWzYCjOQ1QbPNQK9bB0R8GSR-fcVfbQandHkQ1MwFvoIpYl2d/exec';
+// GANTI dengan URL Web App GAS Anda
+var GAS_URL = 'https://script.google.com/macros/s/AKfycbxe01PAfRe1X3IibAWpzxvApXDnsA78atlJvrJwMsVlZxHWy2ymbKreIeeCqbeXF8RB/exec';
+
 function getSlug() {
-  var parts = window.location.pathname.split('/').filter(function(p){ return p.length > 0; });
-  var slug = parts[parts.length - 1];
-  if (!slug || slug === 'f') slug = '';
-  var qs = new URLSearchParams(window.location.search);
-  if (qs.get('id')) slug = qs.get('id');
-  return slug;
+  var qs   = new URLSearchParams(window.location.search);
+  var slug = qs.get('id') || '';
+  return slug.trim();
 }
+
 var slug = getSlug();
 if (!slug) {
   document.getElementById('spin').style.display = 'none';
   document.getElementById('err').style.display  = 'block';
   document.getElementById('err').textContent    = 'ID formulir tidak ditemukan dalam URL.';
-  document.getElementById('msg').textContent    = 'Pastikan URL mengandung ID formulir.';
+  document.getElementById('msg').textContent    = 'Contoh URL yang benar: /strata/f/?id=FORM_001';
 } else {
-  document.getElementById('msg').textContent = 'Mengalihkan ke formulir: ' + slug;
-  setTimeout(function(){ window.location.replace(GAS_URL + '?page=form&id=' + encodeURIComponent(slug)); }, 600);
+  document.getElementById('msg').textContent = 'Mengalihkan ke formulir ' + slug + '...';
+  setTimeout(function() {
+    window.location.replace(GAS_URL + '?page=form&id=' + encodeURIComponent(slug));
+  }, 500);
 }
 </script>
 </body>
