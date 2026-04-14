@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MATA - Monitoring Absensi dan Tanda Tangan Air Tanah</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; overflow: hidden; }
-    iframe {
-      width: 100%;
-      height: 100vh;
-      border: none;
-      display: block;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STRATA — Sistem Terpadu Registrasi dan Tata Formulir</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; background: #0F1D3F; }
+  iframe { width: 100%; height: 100vh; border: none; display: block; }
+  .loading {
+    position: fixed; inset: 0; background: #0F1D3F;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 16px; color: #fff;
+    font-family: system-ui, sans-serif; font-size: 14px; transition: opacity .4s;
+  }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid rgba(255,255,255,.2); border-top-color: #3B82F6;
+    border-radius: 50%; animation: spin .7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
 </head>
 <body>
-  <iframe
-    src="https://script.google.com/macros/s/AKfycbz4y7LCGVrZjTs8yaiD_V9DWCoSd0NTikQYx5HjGCiT1R7-Odnin2gXuLBFjSFGCP88/exec?page=form&id=528D5220"
-    title="MATA — Monitoring Absensi dan Tanda Tangan Air Tanah"
-    allow="clipboard-write"
-  ></iframe>
+<div class="loading" id="loading">
+  <div class="spinner"></div>
+  <div>Memuat STRATA...</div>
+</div>
+<iframe
+  id="app"
+  src="https://script.google.com/macros/s/AKfycbz3jEe5ciLZxZ9W52rWWzYCjOQ1QbPNQK9bB0R8GSR-fcVfbQandHkQ1MwFvoIpYl2d/exec"
+  onload="document.getElementById('loading').style.opacity='0';setTimeout(function(){document.getElementById('loading').style.display='none'},400)"
+  allow="clipboard-write"
+></iframe>
 </body>
 </html>
