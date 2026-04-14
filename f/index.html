@@ -3,56 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>STRATA — Memuat Formulir...</title>
+<title>STRATA — Formulir</title>
 <link rel="icon" type="image/png" href="/strata/favicon.png">
 <style>
-  body {
-    font-family: system-ui, sans-serif;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; background: #0F1D3F; }
+  iframe { width: 100%; height: 100vh; border: none; display: block; }
+  .loading {
+    position: fixed; inset: 0; background: #0F1D3F;
     display: flex; align-items: center; justify-content: center;
-    min-height: 100vh; margin: 0;
-    background: linear-gradient(135deg, #0F1D3F, #1B4FD8);
+    flex-direction: column; gap: 16px; color: #fff;
+    font-family: system-ui, sans-serif; font-size: 14px;
+    transition: opacity .4s;
   }
-  .box { text-align: center; color: #fff; padding: 40px 24px; }
   .spinner {
-    width: 40px; height: 40px;
+    width: 36px; height: 36px;
     border: 3px solid rgba(255,255,255,.2);
     border-top-color: #60A5FA; border-radius: 50%;
-    animation: spin .65s linear infinite; margin: 0 auto 20px;
+    animation: spin .7s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-  h2 { font-size: 18px; margin: 0 0 8px; font-weight: 700; }
-  p  { font-size: 13px; color: rgba(255,255,255,.6); margin: 0; }
-  .err { color: #FCA5A5; font-weight: 600; margin-top: 12px; font-size: 14px; }
 </style>
 </head>
 <body>
-<div class="box">
-  <div class="spinner" id="spin"></div>
-  <h2>STRATA</h2>
-  <p id="msg">Mengalihkan ke formulir, mohon tunggu...</p>
-  <div class="err" id="err" style="display:none"></div>
+<div class="loading" id="loading">
+  <div class="spinner"></div>
+  <div>Memuat formulir...</div>
 </div>
+<iframe id="app" src="" allow="clipboard-write"
+  onload="document.getElementById('loading').style.opacity='0';
+          setTimeout(function(){document.getElementById('loading').style.display='none'},400)">
+</iframe>
 <script>
-// GANTI dengan URL Web App GAS Anda
 var GAS_URL = 'https://script.google.com/macros/s/AKfycbxe01PAfRe1X3IibAWpzxvApXDnsA78atlJvrJwMsVlZxHWy2ymbKreIeeCqbeXF8RB/exec';
-
-function getSlug() {
-  var qs   = new URLSearchParams(window.location.search);
-  var slug = qs.get('id') || '';
-  return slug.trim();
-}
-
-var slug = getSlug();
+var slug = new URLSearchParams(window.location.search).get('id') || '';
 if (!slug) {
-  document.getElementById('spin').style.display = 'none';
-  document.getElementById('err').style.display  = 'block';
-  document.getElementById('err').textContent    = 'ID formulir tidak ditemukan dalam URL.';
-  document.getElementById('msg').textContent    = 'Contoh URL yang benar: /strata/f/?id=FORM_001';
+  document.getElementById('loading').innerHTML =
+    '<div style="text-align:center;padding:20px;color:#FCA5A5;font-family:system-ui;line-height:1.8">' +
+    'ID formulir tidak ditemukan.<br>' +
+    '<small style="color:rgba(255,255,255,.5)">Contoh: /strata/f/?id=FORM_001</small></div>';
 } else {
-  document.getElementById('msg').textContent = 'Mengalihkan ke formulir ' + slug + '...';
-  setTimeout(function() {
-    window.location.replace(GAS_URL + '?page=form&id=' + encodeURIComponent(slug));
-  }, 500);
+  document.getElementById('app').src = GAS_URL + '?page=form&id=' + encodeURIComponent(slug);
 }
 </script>
 </body>
