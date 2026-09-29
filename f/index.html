@@ -3,32 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>STRATA — FORM GAT ESDM JATIM</title>
-<link rel="icon" type="image/png" href="/strata/favicon.png">
+<title>FORM AKUIFERA — Formulir</title>
+<link rel="icon" type="image/png" href="../favicon.png">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; overflow: hidden; background: #0F1D3F; }
-
-  /* Fix mobile: gunakan dvh (dynamic viewport height) dengan fallback 100vh */
+  html, body { height: 100%; overflow: hidden; background: #E0F2FE; }
   iframe {
     width: 100%;
     height: 100vh;
-    height: 100dvh; /* modern browsers: exclude browser chrome */
+    height: 100dvh;
     border: none;
     display: block;
   }
-
   .loading {
-    position: fixed; inset: 0; background: #0F1D3F;
+    position: fixed; inset: 0;
+    background: linear-gradient(135deg, #E0F2FE 0%, #ECFEFF 45%, #E7F0FF 100%);
     display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 16px; color: #fff;
+    flex-direction: column; gap: 14px; color: #475569;
     font-family: system-ui, sans-serif; font-size: 14px;
     transition: opacity .4s;
   }
+  .brand { font-size: 26px; font-weight: 900; letter-spacing: -.6px; color: #0284C7; }
   .spinner {
     width: 36px; height: 36px;
-    border: 3px solid rgba(255,255,255,.2);
-    border-top-color: #60A5FA; border-radius: 50%;
+    border: 3px solid rgba(14,165,233,.2);
+    border-top-color: #06B6D4; border-radius: 50%;
     animation: spin .7s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -36,6 +35,7 @@
 </head>
 <body>
 <div class="loading" id="loading">
+  <div class="brand">FORM AKUIFERA</div>
   <div class="spinner"></div>
   <div>Memuat formulir...</div>
 </div>
@@ -49,15 +49,15 @@ var slug = new URLSearchParams(window.location.search).get('id') || '';
 
 if (!slug) {
   document.getElementById('loading').innerHTML =
-    '<div style="text-align:center;padding:20px;color:#FCA5A5;font-family:system-ui;line-height:1.8">' +
+    '<div style="text-align:center;padding:20px;color:#B91C1C;font-family:system-ui;line-height:1.8">' +
     'ID formulir tidak ditemukan.<br>' +
-    '<small style="color:rgba(255,255,255,.5)">Contoh: /strata/f/?id=FORM_001</small></div>';
+    '<small style="color:#64748B">Contoh: form.akuifera.id/f/?id=FORM_001</small></div>';
 } else {
   document.getElementById('app').src =
     GAS_URL + '?page=form&id=' + encodeURIComponent(slug);
 }
 
-// Fix tinggi iframe secara dinamis (untuk browser yang belum support dvh)
+// Tinggi iframe mengikuti layar (browser yang belum mendukung dvh)
 function fixHeight() {
   var el = document.getElementById('app');
   if (el) el.style.height = window.innerHeight + 'px';
