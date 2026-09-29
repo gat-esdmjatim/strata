@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FORM AKUIFERA — Formulir Online Registrasi dan Monitoring Kegiatan Air Tanah</title>
+<title>STRATA — Sistem Terpadu Registrasi dan Tata Formulir</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -11,12 +11,12 @@
   iframe { width: 100%; height: 100vh; height: 100dvh; border: none; display: block; }
   .loading {
     position: fixed; inset: 0;
-    background: linear-gradient(135deg, #E0F2FE 0%, #ECFEFF 45%, #E7F0FF 100%);
+    background: linear-gradient(180deg, #E6F6FF 0%, #D3EEF8 60%, #BFE3F3 100%);
     display: flex; align-items: center; justify-content: center;
     flex-direction: column; gap: 14px; color: #475569;
     font-family: system-ui, sans-serif; font-size: 14px; transition: opacity .4s;
   }
-  .brand { font-size: 30px; font-weight: 900; letter-spacing: -.8px; color: #0284C7; }
+  .brand { font-size: 32px; font-weight: 900; letter-spacing: .6px; color: #0284C7; }
   .spinner {
     width: 36px; height: 36px;
     border: 3px solid rgba(14,165,233,.2); border-top-color: #06B6D4;
@@ -27,13 +27,13 @@
 </head>
 <body>
 <div class="loading" id="loading">
-  <div class="brand">FORM AKUIFERA</div>
+  <div class="brand">STRATA</div>
   <div class="spinner"></div>
   <div>Memuat aplikasi...</div>
 </div>
 <iframe
   id="app"
-  src="https://script.google.com/macros/s/AKfycbyDIWKIHIj0H_ObOLJYCWKEV-G1N7eZNAKsu6PeO76izPU8n001kSAZEtU9xA5GE5u3/exec"
+  src="https://script.google.com/macros/s/AKfycbx-tniOp_G5s6kGFIf82tgwkQNOIaGaAtY80sH-W5pJCQV1Ls9zSAci6LU--2WRODqd/exec"
   onload="document.getElementById('loading').style.opacity='0';setTimeout(function(){document.getElementById('loading').style.display='none'},400)"
   allow="clipboard-write"
 ></iframe>
